@@ -5,7 +5,6 @@ package notify
 
 import (
 	"net/http"
-	"strings"
 
 	activities_model "gitea.dev/models/activities"
 	"gitea.dev/models/db"
@@ -54,24 +53,8 @@ func getFindNotificationOptions(ctx *context.APIContext) *activities_model.FindN
 
 	subjectTypes := ctx.FormStrings("subject-type")
 	if len(subjectTypes) != 0 {
-		opts.Source = subjectToSource(subjectTypes)
+		opts.Source = utils.SubjectTypeToSource(subjectTypes)
 	}
 
 	return opts
-}
-
-func subjectToSource(value []string) (result []activities_model.NotificationSource) {
-	for _, v := range value {
-		switch strings.ToLower(v) {
-		case "issue":
-			result = append(result, activities_model.NotificationSourceIssue)
-		case "pull":
-			result = append(result, activities_model.NotificationSourcePullRequest)
-		case "commit":
-			result = append(result, activities_model.NotificationSourceCommit)
-		case "repository":
-			result = append(result, activities_model.NotificationSourceRepository)
-		}
-	}
-	return result
 }
