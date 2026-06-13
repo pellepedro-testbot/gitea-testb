@@ -81,6 +81,14 @@ type ServerVersion struct {
 	Version string `json:"version"`
 }
 
+// HealthStatus contains the health and uptime status of the server
+type HealthStatus struct {
+	// Status is the health status string
+	Status string `json:"status"`
+	// UptimeSeconds is the number of seconds the server has been running
+	UptimeSeconds int64 `json:"uptime_seconds"`
+}
+
 // GitignoreTemplateInfo name and text of a gitignore template
 type GitignoreTemplateInfo struct {
 	// Name is the name of the gitignore template
