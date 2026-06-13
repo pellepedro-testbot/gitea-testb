@@ -41,6 +41,7 @@ import (
 	"gitea.dev/services/migrations"
 	mirror_service "gitea.dev/services/mirror"
 	repo_service "gitea.dev/services/repository"
+	"xorm.io/builder"
 )
 
 // Search repositories via options
@@ -191,7 +192,25 @@ func Search(ctx *context.APIContext) {
 	}
 	opts.OrderBy = orderBy
 
-	repos, count, err := repo_model.SearchRepository(ctx, opts)
+	// Build base condition and optionally filter by owner_type (user|org).
+	cond := repo_model.SearchRepositoryCondition(opts)
+	if ownerType := ctx.FormString("owner_type"); ownerType != "" {
+		var userType user_model.UserType
+		switch strings.ToLower(ownerType) {
+		case "org":
+			userType = user_model.UserTypeOrganization
+		case "user":
+			userType = user_model.UserTypeIndividual
+		default:
+			ctx.APIError(http.StatusUnprocessableEntity, "invalid owner_type, expected 'user' or 'org'")
+			return
+		}
+		cond = cond.And(builder.In("owner_id",
+			builder.Select("id").From("`user`").Where(builder.Eq{"`user`.type": userType}),
+		))
+	}
+
+	repos, count, err := repo_model.SearchRepositoryByCondition(ctx, opts, cond, true)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, api.SearchError{
 			OK:    false,
