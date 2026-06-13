@@ -13,7 +13,7 @@ import (
 	"gitea.dev/services/context"
 )
 
-// Markup render markup document to HTML
+// Markup renders a markup document as HTML
 func Markup(ctx *context.APIContext) {
 	// swagger:operation POST /markup miscellaneous renderMarkup
 	// ---
@@ -38,7 +38,7 @@ func Markup(ctx *context.APIContext) {
 	common.RenderMarkup(ctx.Base, ctx.Repo, mode, form.Text, form.Context, form.FilePath)
 }
 
-// Markdown render markdown document to HTML
+// Markdown renders a markdown document as HTML
 func Markdown(ctx *context.APIContext) {
 	// swagger:operation POST /markdown miscellaneous renderMarkdown
 	// ---
@@ -63,7 +63,7 @@ func Markdown(ctx *context.APIContext) {
 	common.RenderMarkup(ctx.Base, ctx.Repo, mode, form.Text, form.Context, "")
 }
 
-// MarkdownRaw render raw markdown HTML
+// MarkdownRaw renders raw markdown as HTML
 func MarkdownRaw(ctx *context.APIContext) {
 	// swagger:operation POST /markdown/raw miscellaneous renderMarkdownRaw
 	// ---
