@@ -1,0 +1,25 @@
+# Skyramp Workspace Configuration
+workspace:
+  repoName: pellepedro-testbot/gitea-testb
+  repoUrl: https://github.com/pellepedro-testbot/gitea-testb
+metadata:
+  schemaVersion: v1
+  mcpVersion: 0.0.64
+  executorVersion: v1.3.27
+  createdAt: "2026-06-13T14:20:41.194Z"
+  updatedAt: "2026-06-13T14:20:41.196Z"
+services:
+  - serviceName: gitea-testb-server
+    language: python
+    framework: pytest
+    testDirectory: tests/skyramp
+    api:
+      schemaPath: http://localhost:3001/swagger.v1.json
+      authType: token
+      authHeader: Authorization
+      authScheme: token
+      baseUrl: http://localhost:3001
+    runtimeDetails:
+      serverStartCommand: docker compose -f deployment-testbot/docker-compose.yml up -d --build
+      runtime: docker
+      dockerNetwork: deployment-testbot_default
