@@ -1,0 +1,54 @@
+[
+  {
+    "Source": "192.168.65.1:39998",
+    "Destination": "localhost",
+    "RequestBody": "{}",
+    "ResponseBody": "{\"token\":\"GENERATED_TOKEN\"}",
+    "RequestHeaders": {
+      "Content-Type": [
+        "application/json"
+      ],
+      "Authorization": [
+        "token SKYRAMP_PLACEHOLDER_TOKEN"
+      ]
+    },
+    "ResponseHeaders": {
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "Method": "POST",
+    "Path": "/api/v1/admin/runners/registration-token",
+    "QueryParams": {},
+    "StatusCode": 201,
+    "Port": 3001,
+    "Timestamp": "2026-06-13T16:30:51.467Z",
+    "Scheme": "http"
+  },
+  {
+    "Source": "192.168.65.1:39998",
+    "Destination": "localhost",
+    "RequestBody": "{}",
+    "ResponseBody": "{}",
+    "RequestHeaders": {
+      "Content-Type": [
+        "application/json"
+      ],
+      "Authorization": [
+        "token SKYRAMP_PLACEHOLDER_TOKEN"
+      ]
+    },
+    "ResponseHeaders": {
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "Method": "POST",
+    "Path": "/api/v1/admin/runners/registration-token",
+    "QueryParams": {},
+    "StatusCode": 409,
+    "Port": 3001,
+    "Timestamp": "2026-06-13T16:30:51.467Z",
+    "Scheme": "http"
+  }
+]
